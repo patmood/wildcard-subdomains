@@ -27,6 +27,11 @@ app.get('/sub/kitty/', function(req, res){
 })
 ```
 
+## Protip
+
+For testing subdomains locally, use the domain `vcap.me:3000`
+
+This is a domain that points back to your local host, allowing you to test subdomains like `foobar.vcap.me`
 
 ##TODO
 - add options to set domain for matching multiple subdomains (eg a.b.c.whatever.com)

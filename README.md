@@ -12,3 +12,5 @@ Query strings and paths remain intact. For example:
 ##TODO
 - add options to set domain for matching multiple subdomains (eg a.b.c.whatever.com)
 - add ability to customize namespace
+- add tests
+- remove console logs when ready for production

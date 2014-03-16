@@ -17,7 +17,17 @@ Require the module in app.js:
 
 Use the module in middleware:
 
-`app.use(subdomain.handler)`
+`app.use(subdomain(options))`
+
+Options include domain (required), namespace (optional, default = 'sub'), www (optional, default = true). By default, requests starting with www will be redirected to their non-www equivalent. Set to false to handle the www requests manually. Example:
+
+```
+app.use(subdomain({
+  domain: 'vcap.me'
+, namespace: 's'
+, www: 'false'
+}))
+```
 
 Handle the new route for your subdomain, for example `kitty.yourdomain.com` would be handled with:
 
@@ -34,7 +44,5 @@ For testing subdomains locally, use the domain `vcap.me:3000`
 This is a domain that points back to your local host, allowing you to test subdomains like `foobar.vcap.me`
 
 ##TODO
-- add options to set domain for matching multiple subdomains (eg a.b.c.whatever.com)
-- add ability to customize namespace
 - add tests
 - remove console logs when ready for production

@@ -1,7 +1,7 @@
 {
   "name": "wildcard-subdomains",
   "description": "Handle dynamic/wildcard subdomains in Express.js",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "author": {
     "name": "Patrick Moody",
     "email": "patrick.n.moody@gmail.com"

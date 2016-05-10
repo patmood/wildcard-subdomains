@@ -37,6 +37,27 @@ app.get('/sub/kitty/', function(req, res){
 })
 ```
 
+If you need to use wildcard with any subdomain (*.mydomain.com) , use this code:
+```
+// Indicate namespace to be replaced for routing
+app.use(subdomain({
+  domain: 'vcap.me'
+, namespace: 'subdomain'
+, www: 'false'
+}))
+
+// Add route with new path
+app.get('/subdomain/:subdomain/',function(req, res){
+    // This objects is injected to req to store subdomains data
+    var subs = req.subdomain.subs;
+    res.send('Subdomains comma separated : ' + subs);
+});
+
+```
+
+With this code you will be able to use any subdomain.
+
+
 ## Protip
 
 For testing subdomains locally, use the domain `vcap.me:3000`

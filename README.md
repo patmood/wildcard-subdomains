@@ -9,6 +9,8 @@ Query strings and paths remain intact. For example:
 
 `kitty.yourdomain.com/lol/cat` can be handled with using the route `/sub/kitty/lol/cat`
 
+Dependency free!
+
 ## How to use
 
 Require the module in app.js:
@@ -46,3 +48,5 @@ This is a domain that points back to your local host, allowing you to test subdo
 ##TODO
 - add tests
 - remove console logs when ready for production
+- add license
+- Add example and npm ignore

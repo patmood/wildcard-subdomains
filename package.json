@@ -4,10 +4,12 @@
   "version": "0.1.0",
   "author": {
     "name": "Patrick Moody",
-    "email": "patrick.n.moody@gmail.com"
+    "url": "http://www.patmoody.com"
   },
-  "dependencies": {
+  "scripts": {
+    "test": "faucet"
   },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/patmood/wildcard-subdomains"
@@ -17,5 +19,12 @@
     "express subdomains",
     "dynamic subdomains",
     "subdomains"
-  ]
+  ],
+  "devDependencies": {
+    "express": "^4.13.4",
+    "faucet": "0.0.1",
+    "supertest": "^1.2.0",
+    "tape": "^4.5.1"
+  },
+  "license": "MIT"
 }

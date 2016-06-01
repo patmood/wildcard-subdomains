@@ -99,14 +99,14 @@ test('handle www', function (t) {
   })
 
   app.get('/s/www', function (req, res) {
-    res.end('www')
+    res.end('custom www handler')
   })
 
   t.plan(2)
   request(app)
     .get('/')
     .set('Host', 'www.test.com')
-    .expect('www')
+    .expect('custom www handler')
     .end(function (err, res) {
       if (err) return t.fail(err)
       t.pass('pass')

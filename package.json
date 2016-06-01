@@ -7,7 +7,8 @@
     "url": "http://www.patmoody.com"
   },
   "scripts": {
-    "test": "node ./test/* | tap-diff"
+    "test": "node ./test/* | tap-diff",
+    "example": "node ./examples/basic.js"
   },
   "dependencies": {},
   "repository": {

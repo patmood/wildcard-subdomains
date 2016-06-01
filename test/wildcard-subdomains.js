@@ -1,7 +1,7 @@
 var test = require('tape')
 var request = require('supertest')
 var express = require('express')
-var wildcardSubdomains = require('../')
+var wildcardSubdomains = require('../')({ domain: 'test.com' })
 
 var app = express()
 app.use(wildcardSubdomains)
@@ -13,8 +13,8 @@ test('request test', function (t) {
   t.plan(1)
   request(app)
     .get('/')
-    .set('Host', 'example.com')
-    .expect('example.com')
+    .set('Host', 'test.com')
+    .expect('test.com')
     .end(function (err, res) {
       if (err) return t.fail(err)
       t.pass('pass')

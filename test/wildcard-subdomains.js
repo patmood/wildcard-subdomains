@@ -29,7 +29,6 @@ test('custom namespace', function (t) {
   app.use(wildcardSubdomains({
     domain: 'test.com',
     namespace: 's',
-    // www: 'false',
   }))
 
   app.get('/s/cat', function (req, res) {
@@ -47,7 +46,7 @@ test('custom namespace', function (t) {
     })
 })
 
-test('ignore www', function (t) {
+test('strip www', function (t) {
   var app = express()
   app.use(wildcardSubdomains({
     domain: 'test.com',
@@ -59,11 +58,95 @@ test('ignore www', function (t) {
     res.end(req.hostname)
   })
 
-  t.plan(1)
+  app.get('/s/cat', function (req, res) {
+    res.end('cat')
+  })
+
+  t.plan(2)
   request(app)
     .get('/')
     .set('Host', 'www.test.com')
     .expect('www.test.com')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+
+  request(app)
+    .get('/')
+    .set('Host', 'cat.test.com')
+    .expect('cat')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+})
+
+test('handle www', function (t) {
+  var app = express()
+  app.use(wildcardSubdomains({
+    domain: 'test.com',
+    namespace: 's',
+    www: false,
+  }))
+
+  app.get('/', function (req, res) {
+    res.end(req.hostname)
+  })
+
+  app.get('/s/cat', function (req, res) {
+    res.end('cat')
+  })
+
+  app.get('/s/www', function (req, res) {
+    res.end('www')
+  })
+
+  t.plan(2)
+  request(app)
+    .get('/')
+    .set('Host', 'www.test.com')
+    .expect('www')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+
+  request(app)
+    .get('/')
+    .set('Host', 'cat.test.com')
+    .expect('cat')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+})
+
+test('wildcard subdomains', function (t) {
+  var app = express()
+  app.use(wildcardSubdomains({
+    domain: 'test.com',
+    namespace: 's',
+  }))
+
+  app.get('/s/:subdomain', function (req, res) {
+    res.end(req.params.subdomain)
+  })
+
+  t.plan(2)
+  request(app)
+    .get('/')
+    .set('Host', 'cat.test.com')
+    .expect('cat')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+
+  request(app)
+    .get('/')
+    .set('Host', 'js.test.com')
+    .expect('js')
     .end(function (err, res) {
       if (err) return t.fail(err)
       t.pass('pass')

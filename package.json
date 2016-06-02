@@ -7,10 +7,13 @@
     "url": "http://www.patmoody.com"
   },
   "scripts": {
-    "test": "node ./test/* | tap-diff",
-    "example": "node ./examples/basic.js"
+    "test": "tap ./test/*",
+    "example": "node ./examples/basic.js",
+    "dev": "node ./test/* | tap-diff"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tap": "^5.7.2"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/patmood/wildcard-subdomains"

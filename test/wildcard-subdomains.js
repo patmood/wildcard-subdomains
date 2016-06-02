@@ -152,3 +152,56 @@ test('wildcard subdomains', function (t) {
       t.pass('pass')
     })
 })
+
+test('multiple subdomains', function (t) {
+  var app = express()
+  app.use(wildcardSubdomains({
+    domain: 'test.com',
+    namespace: 's',
+  }))
+
+  app.get('/s/dog.cat', function (req, res) {
+    res.json(req.subdomains)
+  })
+
+  t.plan(1)
+  request(app)
+    .get('/')
+    .set('Host', 'dog.cat.test.com')
+    .expect(['cat', 'dog'])
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+})
+
+test('subdomain array in request', function (t) {
+  var app = express()
+  app.use(wildcardSubdomains({
+    domain: 'test.com',
+    namespace: 's',
+  }))
+
+  app.get('/s/:subdomain', function (req, res) {
+    res.json(req.subdomains)
+  })
+
+  t.plan(2)
+  request(app)
+    .get('/')
+    .set('Host', 'dog.cat.test.com')
+    .expect(['cat', 'dog'])
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+
+  request(app)
+    .get('/')
+    .set('Host', 'single.test.com')
+    .expect(['single'])
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+})

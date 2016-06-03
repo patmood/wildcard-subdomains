@@ -183,14 +183,14 @@ test('subdomain array in request', function (t) {
   }))
 
   app.get('/s/:subdomain', function (req, res) {
-    res.json(req.subdomains)
+    res.json(req._subdomains)
   })
 
   t.plan(2)
   request(app)
     .get('/')
     .set('Host', 'dog.cat.test.com')
-    .expect(['cat', 'dog'])
+    .expect(['dog', 'cat'])
     .end(function (err, res) {
       if (err) return t.fail(err)
       t.pass('pass')

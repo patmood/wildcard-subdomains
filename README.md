@@ -15,16 +15,16 @@ Dependency free!
 
 Require the module in app.js:
 
-`var subdomain = require('wildcard-subdomains')`
+`var wildcardSubdomains = require('wildcard-subdomains')`
 
 Use the module in middleware:
 
-`app.use(subdomain(options))`
+`app.use(wildcardSubdomains(options))`
 
 Options include domain (required), namespace (optional, default = 'sub'), www (optional, default = true). By default, requests starting with www will be redirected to their non-www equivalent. Set to false to handle the www requests manually. Example:
 
 ```
-app.use(subdomain({
+app.use(wildcardSubdomains({
   domain: 'vcap.me'
 , namespace: 's'
 , www: 'false'
@@ -34,7 +34,7 @@ app.use(subdomain({
 Handle the new route for your subdomain, for example `kitty.yourdomain.com` would be handled with:
 
 ```
-app.get('/sub/kitty/', function(req, res){
+app.get('/s/kitty/', function(req, res){
   res.send("Meow!")
 })
 ```
@@ -44,9 +44,3 @@ app.get('/sub/kitty/', function(req, res){
 For testing subdomains locally, use the domain `vcap.me:3000`
 
 This is a domain that points back to your local host, allowing you to test subdomains like `foobar.vcap.me`
-
-##TODO
-- add tests
-- remove console logs when ready for production
-- add license
-- Add example and npm ignore

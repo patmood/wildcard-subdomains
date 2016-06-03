@@ -1,4 +1,5 @@
 var test = require('tape')
+var xtest = function () {}
 var request = require('supertest')
 var express = require('express')
 var wildcardSubdomains = require('../')
@@ -160,7 +161,7 @@ test('multiple subdomains', function (t) {
     namespace: 's',
   }))
 
-  app.get('/s/dog.cat', function (req, res) {
+  app.get('/s/cat/dog', function (req, res) {
     res.json(req.subdomains)
   })
 
@@ -182,15 +183,15 @@ test('subdomain array in request', function (t) {
     namespace: 's',
   }))
 
-  app.get('/s/:subdomain', function (req, res) {
-    res.json(req._subdomains)
+  app.get('/s/:firstSubdomain/:secondSubdomain?', function (req, res) {
+    res.json(req.subdomains)
   })
 
   t.plan(2)
   request(app)
     .get('/')
     .set('Host', 'dog.cat.test.com')
-    .expect(['dog', 'cat'])
+    .expect(['cat', 'dog'])
     .end(function (err, res) {
       if (err) return t.fail(err)
       t.pass('pass')

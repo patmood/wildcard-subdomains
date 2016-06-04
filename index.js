@@ -1,1 +1,1 @@
-module.exports = require('./lib/dynamic-subdomains')
+module.exports = require('./lib/wildcard-subdomains')

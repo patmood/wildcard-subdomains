@@ -1,6 +1,8 @@
 wildcard-subdomains
 ==================
 
+[![Build Status](https://travis-ci.org/patmood/wildcard-subdomains.svg?branch=master)](https://travis-ci.org/patmood/wildcard-subdomains) [![npm version](https://badge.fury.io/js/wildcard-subdomains.svg)](https://badge.fury.io/js/wildcard-subdomains)
+
 Handle dynamic/wildcard subdomains in Express.js. Perfect for when you have customized subdomains for different users, and need to handle them within your Node app.
 
 Requests to `foo.yourdomain.com` can be handled with using the route `/_sub/:subdomain`

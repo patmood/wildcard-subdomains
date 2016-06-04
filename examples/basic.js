@@ -2,17 +2,43 @@ var express = require('express')
 var app = express()
 var wildcardSubdomains = require('../')
 
-app.use(wildcardSubdomains({
-  domain: 'vcap.me',
-  namespace: 's',
-}))
+app.use(wildcardSubdomains())
 
 app.get('/', function (req, res) {
-  res.end('root')
+  res.send('Visit <a href="http://foo.vcap.me:5555">http://foo.vcap.me:5555</a> (points back to localhost)')
 })
 
-app.get('/s/:firstSubdomain/:secondSubdomain?', function (req, res) {
-  res.end('First Subdomain: ' + req.params.firstSubdomain + ' Second Subdomain: ' + req.params.secondSubdomain)
+app.get('/_sub/bar/foo', function (req, res) {
+  res.end(
+    'Subdomains: ' +
+    JSON.stringify(req.subdomains) +
+    '\n' +
+    'Original Url: ' +
+    req.originalUrl +
+    '\n' +
+    'New Url: ' +
+    req.url +
+    '\n' +
+    'Query string: ' +
+    JSON.stringify(req.query)
+  )
+})
+
+// Generous matching
+app.get('/_sub/:firstSubdomain/*', function (req, res) {
+  res.end(
+    'First Subdomain: ' +
+    req.params.firstSubdomain +
+    '\n' +
+    'Original Url: ' +
+    req.originalUrl +
+    '\n' +
+    'New Url: ' +
+    req.url +
+    '\n' +
+    'Query string: ' +
+    JSON.stringify(req.query)
+  )
 })
 
 app.listen(5555)

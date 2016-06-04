@@ -10,7 +10,7 @@ test('default subdomain namespace', function (t) {
     domain: 'test.com',
   }))
 
-  app.get('/sub/cat', function (req, res) {
+  app.get('/_sub/cat', function (req, res) {
     res.end(req.hostname)
   })
 

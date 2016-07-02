@@ -52,7 +52,7 @@ test('stripSubdomain test ', function (t) {
   app.use(wildcardSubdomains({
     domain: 'test.com',
     namespace: 's',
-    stripSubdomain: 'www'
+    ignore: 'www'
   }))
 
   app.get('/', function (req, res) {

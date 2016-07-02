@@ -47,12 +47,12 @@ test('custom namespace', function (t) {
     })
 })
 
-test('strip www', function (t) {
+test('stripSubdomain test ', function (t) {
   var app = express()
   app.use(wildcardSubdomains({
     domain: 'test.com',
     namespace: 's',
-    www: true,
+    ignore: 'www'
   }))
 
   app.get('/', function (req, res) {
@@ -87,8 +87,7 @@ test('handle www', function (t) {
   var app = express()
   app.use(wildcardSubdomains({
     domain: 'test.com',
-    namespace: 's',
-    www: false,
+    namespace: 's'
   }))
 
   app.get('/', function (req, res) {

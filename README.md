@@ -24,17 +24,19 @@ Use the module in middleware:
 `app.use(wildcardSubdomains(opts))`
 
 ### `opts` - Object
-| Key       | Type    | Default  | Description            |
-| --------- | ------- | -------- | ---------------------- |
-| namespace | String  | `'_sub'` | Prepended to the path  |
-| www       | Boolean | `true`   | Ignore 'www' subdomain |
+| Key           | Type    | Default  | Description                                      |
+| ------------- | ------- | -------- | ------------------------------------------------ |
+| namespace     | String  | `'_sub'` | Prepended to the path                            |
+| ignore        | String  | `''`     | Ignore url if its first subdomain matches ignore |
+| stripSubdomain| String  | `''`     | Find and remove subdomain matching stripSubdomain|
 
 Example options:
 
 ```
 app.use(wildcardSubdomains({
   namespace: 's',
-  www: 'false',
+  ignore: 'app',
+  stripSubdomain:'www'
 }))
 ```
 

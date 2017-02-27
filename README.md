@@ -24,17 +24,17 @@ Use the module in middleware:
 `app.use(wildcardSubdomains(opts))`
 
 ### `opts` - Object
-| Key       | Type    | Default  | Description            |
-| --------- | ------- | -------- | ---------------------- |
-| namespace | String  | `'_sub'` | Prepended to the path  |
-| www       | Boolean | `true`   | Ignore 'www' subdomain |
+| Key       | Type            | Default  | Description            |
+| --------- | --------------- | -------- | ---------------------- |
+| namespace | String          | `'_sub'` | Prepended to the path  |
+| whitelist | String or Array | `['www']`| Subdomains to ignore   |
 
 Example options:
 
 ```
 app.use(wildcardSubdomains({
   namespace: 's',
-  www: 'false',
+  whitelist: ['www', 'app'],
 }))
 ```
 
@@ -45,6 +45,8 @@ app.get('/s/foo/', function(req, res){
   res.send("Meow!")
 })
 ```
+
+By using the `whiteList` option, requests to `app.yourdomain.com` and `www.yourdomain.com` will be ignored and handled normally.
 
 ## Example
 

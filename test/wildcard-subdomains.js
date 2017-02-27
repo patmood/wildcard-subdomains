@@ -206,3 +206,38 @@ test('subdomain array in request', function (t) {
       t.pass('pass')
     })
 })
+
+test('whitelist', function (t) {
+  var app = express()
+  app.use(wildcardSubdomains({
+    domain: 'test.com',
+    whitelist: ['www', 'support'],
+  }))
+
+  app.get('/test', function (req, res) {
+    res.end('correct route')
+  })
+
+  app.get('/_sub/cat', function (req, res) {
+    res.end(req.hostname)
+  })
+
+  t.plan(2)
+  request(app)
+    .get('/test')
+    .set('Host', 'support.test.com')
+    .expect('correct route')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+
+  request(app)
+    .get('/')
+    .set('Host', 'cat.test.com')
+    .expect('cat.test.com')
+    .end(function (err, res) {
+      if (err) return t.fail(err)
+      t.pass('pass')
+    })
+})

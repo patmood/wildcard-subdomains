@@ -1,35 +1,23 @@
 {
-  "name": "wildcard-subdomains",
-  "description": "Handle dynamic/wildcard subdomains in Express.js",
-  "version": "1.1.0",
-  "homepage": "https://github.com/patmood/wildcard-subdomains",
-  "author": {
-    "name": "Patrick Moody",
-    "url": "http://www.patmoody.com"
-  },
-  "scripts": {
-    "test": "tap ./test/*",
-    "example": "node ./examples/basic.js",
-    "dev": "node ./test/* | tap-diff"
-  },
+  "name": "subdomain-wildcard",
+  "version": "1.0.0",
+  "description": "Urbanhire wildcard subdomain. Handle dynamic/wildcard subdomains in Express.js. This is modified from package https://www.npmjs.com/package/wildcard-subdomains. We custome to handle when main domain is subdomain. Ex: co.id, or.id",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/patmood/wildcard-subdomains"
+    "url": "git@github.com:urbanhire/wildcard-subdomains.git"
   },
-  "bugs": "https://github.com/patmood/wildcard-subdomains/issues",
-  "keyword": [
-    "wildcard subdomains",
-    "express subdomains",
-    "dynamic subdomains",
-    "subdomains"
-  ],
-  "devDependencies": {
-    "express": "^4.13.4",
-    "supertest": "^1.2.0",
-    "tap": "^5.7.2",
-    "tap-diff": "^0.1.1",
-    "tape": "^4.5.1"
+  "author": "Urbanhire Engineer <dev@urbanhire.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/urbanhire/wildcard-subdomains/issues"
   },
-  "license": "MIT"
+  "homepage": "https://github.com/urbanhire/wildcard-subdomains",
+  "dependencies": {
+    "extend": "^3.0.1",
+    "fastparallel": "^2.3.0"
+  }
 }
